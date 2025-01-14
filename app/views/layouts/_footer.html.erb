@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content {
+      flex: 1;
+    }
+
+    footer {
+      background-color: transparent;
+      padding: 20px 0;
+      text-align: center;
+      width: 100%;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-links a {
+      margin: 0 10px;
+      color: #d40031;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .logout-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      color: #D40031;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .logout-btn i {
+      margin-right: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .logout-btn:hover {
+      color: #5A5A5A;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="content"></div>
+  <footer>
+    <div class="footer-container">
+    <hr style="width: 50%; margin: 10px auto; border: none; border-top: 1px solid #ddd;">
+    <p style="margin: 5px 0; font-size: 14px; color: #333;"><strong><%= I18n.t("footer.heading") %></strong></p>
+    <p style="margin: 5px 0; font-size: 14px; color: #333;">
+      <a href="https://fiti-frankfurt.de" target="_blank"><%= I18n.t("footer.first_paragraph") %></a>
+    </p>
+    <p style="margin: 5px 0; font-size: 14px; color: #333;"><%= I18n.t("footer.second_paragraph") %></p>
+    <div class="footer-links">
+      <a href="https://fiti-frankfurt.de/impressum/" target="_blank"><%= I18n.t("footer.imprint") %></a>
+      <a href="https://fiti-frankfurt.de/datenschutzerklaerung/" target="_blank"><%= I18n.t("footer.privacy_policy") %></a>
+      <a href="https://fiti-frankfurt.de/#kontakt" target="_blank"><%= I18n.t("footer.contact") %></a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="logout-container">
+    <% if current_user %>
+      <%= link_to destroy_user_session_path, data: { "turbo-method": :delete }, class: 'logout-btn' do %>
+        <i class="fas fa-door-open"></i>
+        <%= I18n.t("navbar.logout") %>
+      <% end %>
+    <% end %>
+  </div>
+
+</body>
+</html>

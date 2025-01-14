@@ -1,0 +1,124 @@
+<div id="<%= dom_id(project) %>" class="bg-white">
+  <!-- Titel des Projekts -->
+  <p class="my-5">
+    <strong class="m-5 block text-3xl font-bold text-gray-900 mb-2"><%= project.project_title %></strong>
+  </p>
+
+  <div class="flex flex-row">
+    <div class="w-2/3">
+      <!-- Thematischer Fokus -->
+      <p class="bg-fitibg p-5 m-5 rounded" style="width: 600px; height: 100px; overflow: hidden;">
+        <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("projects.fields.thematic_focus") %></strong>
+        <span class="text-gray-600"><%= project.thematic_focus %></span>
+      </p>
+
+      <!-- Auftraggeber -->
+      <p class="bg-fitibg p-5 m-5 rounded" style="width: 600px; height: 100px; overflow: hidden;">
+        <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("projects.fields.client") %></strong>
+        <span class="text-gray-600"><%= project.client %></span>
+      </p>
+
+      <!-- Standort -->
+      <p class="bg-fitibg p-5 m-5 rounded" style="width: 600px; height: 100px; overflow: hidden;">
+        <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("projects.fields.location") %></strong>
+        <span class="text-gray-600"><%= project.location %></span>
+      </p>
+
+      <!-- Projekttyp -->
+      <p class="bg-fitibg p-5 m-5 rounded" style="width: 600px; height: 100px; overflow: hidden;">
+        <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("projects.fields.project_types.project_type") %></strong>
+        <span class="text-gray-600">
+          <% if project.project_type %>
+            <%= I18n.t("projects.fields.project_types.#{project.project_type}") %>
+          <% else %>
+            <%= I18n.t("general.unavailable") %>
+          <% end %>
+        </span>
+      </p>
+
+      <!-- Dateien hochladen (Teilnehmerliste, Einladungsschreiben, Teilnahmezertifikate) -->
+      <% uploads = [
+        { field: :participants_files, label: I18n.t("projects.fields.participants_files") },
+        { field: :invitation_files, label: I18n.t("projects.fields.invitation_files"), status: project.invitation_status || I18n.t("general.unavailable") },
+        { field: :participation_certificate_files, label: I18n.t("projects.fields.participation_certificate_files"), status: project.participation_certificate_status || I18n.t("general.unavailable") }
+      ] %>
+
+      <% uploads.each do |upload| %>
+        <div class="bg-fitibg p-5 m-5 rounded" style="width: 600px; overflow: hidden;">
+          <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= upload[:label] %>:</strong>
+          
+          <% if upload[:status] %>
+            <span class="text-gray-600 mb-2"><%= I18n.t("projects.fields.file_status") %>: <%= upload[:status] %></span>
+          <% end %>
+
+          <!-- Hochgeladene Dateien anzeigen -->
+          <% if project.send(upload[:field]).attached? %>
+            <ul class="text-gray-600">
+              <% project.send(upload[:field]).each do |file| %>
+                <li>
+                  <a href="<%= show_file_project_url(project, file_type: upload[:field], attachment_id: file.id) %>" class="text-blue-600" target="_blank">
+                    <%= file.filename.to_s %>
+                  </a>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <span class="text-gray-600"><%= I18n.t("projects.fields.no_file_uploaded", label: upload[:label].downcase) %></span>
+          <% end %>
+        </div>
+      <% end %>
+
+
+      <div class="bg-fitibg p-5 m-5 rounded shadow" style="width: 600px; overflow: hidden;">
+        <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("navbar.experts") %></strong>
+  
+        <% if @project.experts.any? %>
+        <div class="flex flex-wrap mt-2">
+          <% @project.experts.each do |expert| %>
+          <div class="expert-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-lg flex items-center m-1" data-id="<%= expert.id %>">
+            <%= link_to expert.email, expert_path(expert), class: "hover:underline", target: "_blank" %>
+          </div>
+          <% end %>
+        </div>
+        <% else %>
+          <span class="text-gray-600"><%= I18n.t("general.unavailable") %></span>
+        <% end %>
+      </div>
+
+
+
+
+
+
+
+    </div>
+
+    <!-- Projektzeitraum -->
+    <div class="w-1/3">
+      <div class="bg-fitibg p-5 m-5 rounded" style="width: 300px; height: 100px; overflow: hidden;">
+        <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("projects.fields.project_period") %></strong>
+        <p class="text-gray-600">
+          <strong><%= I18n.t("projects.fields.start_date") %>:</strong> <%= project.start_date ? project.start_date.strftime('%d.%m.%Y') : I18n.t("general.unavailable") %><br>
+          <strong><%= I18n.t("projects.fields.end_date") %>:</strong> <%= project.end_date ? project.end_date.strftime('%d.%m.%Y') : I18n.t("general.unavailable") %>
+        </p>
+      </div>
+
+      <!-- Projektablaufplan -->
+      <div class="bg-fitibg p-5 m-5 rounded" style="width: 300px; height: 250px; overflow-y: auto;">
+        <h1 class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("projects.project_schedule.schedule") %></h1>
+
+        <ul class="text-gray-600">
+          <li><%= I18n.t("projects.project_schedule.schedule") %></li>
+          <li><%= I18n.t("projects.project_schedule.budget_plan") %></li>
+          <li><%= I18n.t("projects.project_schedule.date_of_flight") %></li>
+          <li><%= I18n.t("projects.project_schedule.event") %></li>
+          <li><%= I18n.t("projects.project_schedule.event_location") %></li>
+          <li><%= I18n.t("projects.project_schedule.transport") %></li>
+          <li><%= I18n.t("projects.project_schedule.accommodation") %></li>
+          <li><%= I18n.t("projects.project_schedule.interpreter") %></li>
+          <li><%= I18n.t("projects.project_schedule.bills") %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

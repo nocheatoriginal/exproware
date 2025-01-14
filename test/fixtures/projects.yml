@@ -1,0 +1,49 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_title: "Fortbildung praxisorientierte Ausbildung Juli 2025"
+  thematic_focus: "Ausbildung, Handwerker"
+  start_date: <%= Date.today %>
+  end_date: <%= Date.today + 1.month %>
+  client: "Beijing Institute xyz"
+  location: "München, Deutschland"
+  invitation_status: "versendet"
+  participation_certificate_status: "versendet"
+  project_type: delegation_visit
+  archived: false
+
+two:
+  project_title: "Fortbildung praxisorientierte Ausbildung August 2025"
+  thematic_focus: "Ausbildung"
+  start_date: <%= Date.today %>
+  end_date: <%= Date.today + 2.months %>
+  client: "Beijing Institute xyz"
+  location: "Berlin, Deutschland"
+  invitation_status: "versendet"
+  participation_certificate_status: "versendet"
+  project_type: lecturer_training
+  archived: false
+
+three:
+  project_title: "Fortbildung praxisorientierte Ausbildung September 2025"
+  thematic_focus: "Handwerker"
+  start_date: <%= Date.today %>
+  end_date: <%= Date.today + 3.months %>
+  client: "Beijing Institute xyz"
+  location: "Hamburg, Deutschland"
+  invitation_status: "versendet"
+  participation_certificate_status: "versendet"
+  project_type: summer_school
+  archived: false
+
+archived:
+  project_title: "Archiviertes Projekt Oktober 2025"
+  thematic_focus: "Archivierung"
+  start_date: <%= Date.today - 6.months %>
+  end_date: <%= Date.today - 5.months %>
+  client: "Archiv-Institut"
+  location: "Köln, Deutschland"
+  invitation_status: "versendet"
+  participation_certificate_status: "versendet"
+  project_type: delegation_visit
+  archived: true

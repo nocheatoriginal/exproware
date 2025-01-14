@@ -1,0 +1,30 @@
+<div class="w-full">
+  <%= render partial: "layouts/page_header", locals: { 
+        title: I18n.t("categories.all"), 
+    } %>
+
+  <div class="flex justify-end mb-10">
+    <div class="flex space-x-4">
+    <%= link_to new_category_path, class: "w-full block" do %>
+      <button class="py-3 px-5 text-white bg-[#d40031] rounded-full shadow-lg font-semibold border-2 border-[#d40031] hover:bg-white hover:text-[#d40031] hover:border-[#d40031] transition duration-300">
+        <%= I18n.t("categories.new_category") %>
+      </button>
+    <% end %>
+    </div>
+  </div>
+
+  <div id="categories" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% @categories.each do |category| %>
+      <div class="bg-white shadow-lg rounded-lg p-6 border border-gray-200 flex flex-col justify-between">
+        <%= render category %>
+        <div class="mt-4 ">
+          <%= link_to category, class: "w-full block" do %>
+          <button class="w-full rounded-full py-3 px-6 bg-gray-400 hover:bg-gray-500 text-white font-medium transition-all duration-300 shadow-md">
+            <%= I18n.t("general.show") %>
+          </button>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

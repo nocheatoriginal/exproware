@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || I18n.t("exproware") %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="<%= asset_path 'exproware.ico' %>" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <%= javascript_importmap_tags %>#<%= image_tag 'network.png', style: 'display: none;', alt: '' %>
+  </head>
+
+  <body>
+    <main class="container mx-auto mt-28 px-5 flex flex-col m-5">
+      
+
+    <% if !current_user %>
+      <%= render "layouts/navbar" %>
+    <% elsif current_user.admin? %>
+      <%= render "layouts/navbar_admin" %>
+    <% elsif current_user.readonly? %>
+      <%= render "layouts/navbar_readonly" %>
+    <% elsif current_user.user? %>
+      <%= render "layouts/navbar_user" %>
+    <% end %>
+    
+      <% flash.each do |type, message| %>
+        <div class="alert alert-<%= type %> border border-gray-500 text-gray-700 bg-gray-100 rounded p-4 mb-4">
+          <%= message %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
+
+
+    <%= render 'layouts/footer' %>
+  </body>
+</html>

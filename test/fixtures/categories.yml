@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+mathematics:
+  id: 0
+  name: Mathematics
+
+physics:
+  id: 1
+  name: Physics
+
+chemistry:
+  id: 2
+  name: Chemistry
+
+biology:
+  id: 3
+  name: Biology
+
+software_engineering:
+  id: 4
+  name: Software Engineering

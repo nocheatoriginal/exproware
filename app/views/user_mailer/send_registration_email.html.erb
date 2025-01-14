@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            /* Allgemeine Zentrierung */
+            body {
+                text-align: center;
+                font-family: Arial, sans-serif;
+                color: #333;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Container für die zentrierte E-Mail */
+            .email-container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                text-align: center;
+            }
+
+            /* Stile für den Button */
+            .button {
+                display: inline-block;
+                padding: 12px 24px;
+                font-size: 16px;
+                color: #ffffff !important; /* Weißer Text */
+                background-color: #d40031; /* Hintergrundfarbe */
+                text-decoration: none; /* Entfernt Unterstreichung */
+                border-radius: 5px;
+                margin-top: 20px;
+            }
+
+            /* Footer-Stile */
+            .footer {
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 1px solid #ddd;
+                font-size: 14px;
+                color: #666666;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="email-container">
+            <h1>Herzlich willkommen bei Exproware!</h1>
+            <p>
+                Vielen Dank für Ihre Registrierung.<br>
+                Klicken Sie auf den folgenden Button, um Ihr Konto zu aktivieren:
+            </p>
+            <p>
+                <a href="<%= @register_url %>" class="button">Aktiviere dein Konto</a>
+            </p>
+            <p>Mit freundlichen Grüßen,<br>Ihr Exproware Team</p>
+            
+            <p><br>Der Registrierungslink gültig bis zum <%= @expires %></p>
+
+            <!-- Footer mit Kontaktdaten -->
+            <div class="footer">
+                <p>Kontaktieren Sie uns bei Fragen:</p>
+                <p>Email: support@exproware.com | Telefon: +49 123 456 7890</p>
+                <p>Adresse: Exproware, Musterstraße 1, 12345 Musterstadt</p>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,131 @@
+<div class="w-full">
+  <%= render partial: "layouts/page_header", locals: { 
+        title: I18n.t("usermanagement.all"), 
+    } %>
+
+
+<div class="flex justify-end mb-10">
+  <button id="openInviteModal" class="py-3 px-5 text-white bg-[#d40031] rounded-full shadow-lg font-semibold border-2 border-[#d40031] hover:bg-white hover:text-[#d40031] hover:border-[#d40031] transition duration-300 mr-4">
+    <%= I18n.t("usermanagement.expert_invite") %>
+  </button>
+</div>
+
+<div id="inviteModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden" style="z-index: 1000;">
+  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+    <div class="flex justify-between items-center border-b pb-4">
+      <h2 class="text-xl font-semibold"><%= I18n.t("usermanagement.expert_invite") %></h2>
+      <button id="closeInviteModal" class="text-gray-500 hover:text-gray-700">&times;</button>
+    </div>
+    <%= form_with model: @user, url: admin_users_path, method: :post, local: true do |f| %>
+      <div class="space-y-4 mt-4">
+        <%= render "devise/shared/error_messages", resource: @user %>
+        <%= f.hidden_field :user_type, value: "expert_invite" %>
+        <div class="field">
+          <%= f.label :email, I18n.t("user.email") %><br />
+          <%= f.email_field :email, autocomplete: "email", class: "w-full rounded-lg p-2 border rounded" %>
+        </div>
+        <div class="field actions">
+          <%= f.submit I18n.t("usermanagement.send_invite"), class: "w-full rounded-full py-3 px-6 bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all duration-300 shadow-md" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script>
+  document.getElementById('openInviteModal').addEventListener('click', function() {
+    document.getElementById('inviteModal').classList.remove('hidden');
+  });
+
+  document.getElementById('closeInviteModal').addEventListener('click', function() {
+    document.getElementById('inviteModal').classList.add('hidden');
+  });
+  window.addEventListener('click', function(event) {
+    const modal = document.getElementById('inviteModal');
+    if (event.target === modal) {
+      modal.classList.add('hidden');
+    }
+  });
+</script>
+
+<div class="overflow-x-auto">
+  <table class="min-w-full border border-gray-300 mx-auto">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="border px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= I18n.t("user.email") %></th>
+        <th class="border px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= I18n.t("general.status") %></th>
+        <th class="border px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= I18n.t("user.role") %></th>
+        <th class="border px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= I18n.t("general.action") %></th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      <% @users.each do |user| %>
+        <% link = OneTimeLink.find_by(email: user.email) %>
+        <tr>
+          <!-- Email -->
+            <td class="border px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+            <% if user %>
+              <%= link_to user.email, profile_path(user.id), class: "text-blue-600 hover:text-blue-800", target: "_blank" %>
+            <% else %>
+              <%= user.email %>
+            <% end %>
+            </td>
+          
+          <!-- Status -->
+          <td class="border px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= I18n.t("user.authenticated") %></td>
+
+
+          <!-- Rolle -->
+          <td class="border px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+            <% if user.admin? && User.where(role: "admin").count <= 1 %>
+              <span class="text-gray-500 cursor-not-allowed">Admin</span>
+            <% else %>
+              <%= form_for([:admin, user], url: update_role_admin_user_path(user), method: :patch, html: { class: "inline-block" }) do |f| %>
+                <%= f.select :role, @roles.map { |role| [I18n.t("user_roles.#{role}"), role] }, { selected: user.role }, { onchange: 'this.form.submit();', class: "block w-28 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200" } %>
+              <% end %>
+            <% end %>
+          </td>
+
+          <!-- Aktion -->
+          <td class="border px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+            <% if user.role == "admin" && User.where(role: "admin").count <= 1 %>
+              <span class="block rounded-full py-2 px-3 text-sm text-white text-center font-semibold bg-gray-500 hover:bg-gray-600 cursor-not-allowed"><%= I18n.t("general.delete") %></span>
+            <% else %>
+              <%= button_to I18n.t("general.delete"), admin_user_path(user), method: :delete, data: {turbo_confirm: I18n.t("general.delete_confirmation")}, class: "w-full block rounded-full py-2 px-3 text-sm text-white text-center font-semibold bg-red-600 hover:bg-red-700 transition duration-300 ease-in-out" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+
+      <!-- Nun alle offenen Einladungen anzeigen, für die es noch keinen User gibt -->
+      <% @links.each do |link| %>
+        <% user = User.find_by(email: link.email) %>
+        <% next if user.present? %> <!-- Überspringen, falls bereits ein User existiert -->
+
+        <tr>
+          <!-- E-Mail -->
+          <td class="border px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= link.email %></td>
+
+          <!-- Einladung -->
+          <td class="border px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+            <%= I18n.t("usermanagement.invited_at") %> <%= link.created_at.strftime("%d.%m.%Y") %>
+          </td>
+
+          <td class="border px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+            <% if !link.used %>
+              <%= I18n.t("user_roles.user") %>
+            <% end %>
+          </td>
+
+
+          <!-- Aktion (Löschen des Links) -->
+          <td class="border px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+            <%= button_to I18n.t("general.delete"), delete_one_time_link_admin_users_path(email: link.email),
+              method: :delete, data: {turbo_confirm: I18n.t("general.delete_confirmation")},
+              class: "block w-full rounded-full py-2 px-3 text-sm text-white text-center font-semibold bg-red-600 hover:bg-red-700 transition duration-300 ease-in-out" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+</div>

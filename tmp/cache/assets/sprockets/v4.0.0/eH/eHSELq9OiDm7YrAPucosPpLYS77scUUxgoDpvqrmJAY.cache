@@ -1,0 +1,65 @@
+{:uriI"|file://app/assets/images/experts.yml?type=text/yaml&id=c25d2b4e0e5c32912138f3102b06a302534b8028d934a76bd2515259e80e37fc:ET:load_pathI"app/assets/images;T:filenameI""app/assets/images/experts.yml;T:	nameI"experts;T:logical_pathI"experts.yml;T:content_typeI"text/yaml;T:sourceI"¶john_doe:
+  first_name: "John"
+  last_name: "Doe"
+  academic_title: "Dr."
+  salary: 100.0
+  travel_willingness: "I am willing to travel"
+  biography: "I am a professor of mathematics and physics."
+  email: "john.doe@example.com"
+  categories: [Category.find(1), Category.find(2)]
+
+emilia_clarke:
+  first_name: "Emilia"
+  last_name: "Clarke"
+  academic_title: "Prof."
+  salary: 200.0
+  travel_willingness: "I am willing to travel"
+  biography: "I am a professor of software engineering."
+  email: "emilia.clarke@example.com"
+  categories: [Category.find(1), Category.find(2)]
+
+jason_bourne:
+  first_name: "Jason"
+  last_name: "Bourne"
+  academic_title: "Prof."
+  salary: 300.0
+  travel_willingness: "I am willing to travel"
+  biography: "I am a professor of biology."
+  email: "jason.bourne@example.com"
+  categories: [Category.find(1), Category.find(2)]
+
+thomas_anderson:
+  first_name: "Thomas"
+  last_name: "Anderson"
+  academic_title: "Prof."
+  salary: 400.0
+  travel_willingness: "I am willing to travel"
+  biography: "I am a professor of chemistry."
+  email: "thomas.anderson@example.com"
+  categories: [Category.find(1), Category.find(2)]
+
+alice_wonderland:
+  first_name: "Alice"
+  last_name: "Wonderland"
+  academic_title: "Prof."
+  salary: 500.0
+  travel_willingness: "I am willing to travel"
+  biography: "I am a professor of mathematics."
+  email: "alice.wonderland@example.com"
+  categories: [Category.find(1), Category.find(2)]
+
+lisa_simpson:
+  first_name: "Lisa"
+  last_name: "Simpson"
+  academic_title: "Prof."
+  salary: 600.0
+  travel_willingness: "I am willing to travel"
+  biography: "I am a professor of physics."
+  email: "lisa.simpson@example.com"
+  categories: [Category.find(1), Category.find(2)]
+;T:metadata{
+:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"2processors:type=text/yaml&file_type=text/yaml;TTI"0file-digest://app/assets/images/experts.yml;TTF:charsetI"
+utf-8;F:digest"%D!.îMÀOXå·L"Ý”rk±¥þqQ¸ßß'Y>Ze:lengthi¶:environment_versionI"1.0;T:dependencies_digest"%U,ý;ÏF¨ŽóX
+$·»'Y_Rñ0½çXbU¡:idI"Ec25d2b4e0e5c32912138f3102b06a302534b8028d934a76bd2515259e80e37fc;F

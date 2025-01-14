@@ -1,0 +1,214 @@
+<%= form_with(model: project, html: { multipart: true }, class: "contents bg-white p-6 rounded-lg shadow-md") do |form| %>
+  
+  <!-- Fehleranzeige bei Validierungsfehlern -->
+  <% if project&.errors&.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2>
+        <%= pluralize(project.errors.count, I18n.t("projects.errors.error")) %> 
+        <%= I18n.t("projects.errors.project_could_not_be_saved") %>
+      </h2>
+      <ul>
+        <% project.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <!-- Projekt-Titel -->
+  <div class="my-5">
+    <%= form.label :project_title, I18n.t("projects.fields.title"), class: "font-semibold text-gray-700" %>
+    <%= form.text_area :project_title, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", placeholder: I18n.t("projects.placeholders.project_title") %>
+  </div>
+
+  <!-- Thematischer Fokus -->
+  <div class="my-5">
+    <%= form.label :thematic_focus, I18n.t("projects.fields.thematic_focus"), class: "font-semibold text-gray-700" %>
+    <%= form.text_area :thematic_focus, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", placeholder: I18n.t("projects.placeholders.thematic_focus") %>
+  </div>
+
+  <!-- Startdatum und Enddatum -->
+  <div class="my-5 flex space-x-4">
+    <!-- Startdatum -->
+    <div class="flex-1">
+      <%= form.label :start_date, I18n.t("projects.fields.start_date"), class: "font-semibold text-gray-700" %>
+      <%= form.date_field :start_date, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", placeholder: I18n.t("projects.placeholders.date") %>
+    </div>
+    <!-- Enddatum -->
+    <div class="flex-1">
+      <%= form.label :end_date, I18n.t("projects.fields.end_date"), class: "font-semibold text-gray-700" %>
+      <%= form.date_field :end_date, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", placeholder: I18n.t("projects.placeholders.date") %>
+    </div>
+  </div>
+
+  <!-- Projekttyp -->
+  <div class="my-5">
+    <%= form.label :project_type, I18n.t("projects.fields.project_type"), class: "font-semibold text-gray-700" %>
+    <%= form.select :project_type, [[I18n.t("general.please_select"), '']] + @project_types.map { |project_type| [I18n.t("projects.fields.project_types.#{project_type}"), project_type] }, {}, class: "mt-1 block w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-custom-red focus:border-custom-red" %>
+  </div>
+
+  <!-- Projektauftraggeber -->
+  <div class="my-5">
+    <%= form.label :client, I18n.t("projects.fields.client"), class: "font-semibold text-gray-700" %>
+    <%= form.text_area :client, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", placeholder: I18n.t("projects.placeholders.client") %>
+  </div>
+
+  <!-- Standort -->
+  <div class="my-5">
+    <%= form.label :location, I18n.t("projects.fields.location"), class: "font-semibold text-gray-700" %>
+    <%= form.text_area :location, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", placeholder: I18n.t("projects.placeholders.location") %>
+  </div>
+
+  <!-- Dateien-Uploads -->
+  <% uploads = [
+    { field: :participants_files, label: I18n.t("projects.fields.participants_files"), help_text: I18n.t("projects.help_texts.participants_files") },
+    { field: :invitation_files, label: I18n.t("projects.fields.invitation_files"), help_text: I18n.t("projects.help_texts.invitation_files") },
+    { field: :participation_certificate_files, label: I18n.t("projects.fields.participation_certificate_files"), help_text: I18n.t("projects.help_texts.participation_certificate_files") },
+  ] %>
+
+  <% uploads.each do |upload| %>
+    <div class="my-5 border-t pt-4">
+      <!-- Dateifeld-Beschreibung -->
+      <h3 class="font-semibold text-gray-700"><%= upload[:label] %></h3>
+
+      <!-- Radio-Buttons für Status, falls nötig -->
+      <% if upload[:field] == :invitation_files %>
+        <div class="flex space-x-4 mt-4">
+          <!-- Status: In Bearbeitung -->
+          <div class="flex items-center">
+            <%= form.radio_button :invitation_status, I18n.t("projects.status.in_progress"), id: "invitation_in_progress" %>
+            <%= form.label :invitation_status, I18n.t("projects.status.in_progress"), value: "in Bearbeitung", class: "ml-2 cursor-pointer" %>
+          </div>
+          <!-- Status: Versendet -->
+          <div class="flex items-center">
+            <%= form.radio_button :invitation_status, I18n.t("projects.status.sent"), id: "invitation_sent" %>
+            <%= form.label :invitation_status, I18n.t("projects.status.sent"), value: "versendet", class: "ml-2 cursor-pointer" %>
+          </div>
+        </div>
+      <% elsif upload[:field] == :participation_certificate_files %>
+        <div class="flex space-x-4 mt-4">
+          <!-- Status: In Bearbeitung -->
+          <div class="flex items-center">
+            <%= form.radio_button :participation_certificate_status, I18n.t("projects.status.in_progress"), id: "certificate_in_progress" %>
+            <%= form.label :participation_certificate_status, I18n.t("projects.status.in_progress"), value: "in Bearbeitung", class: "ml-2 cursor-pointer" %>
+          </div>
+          <!-- Status: Versendet -->
+          <div class="flex items-center">
+            <%= form.radio_button :participation_certificate_status, I18n.t("projects.status.sent"), id: "certificate_sent" %>
+            <%= form.label :participation_certificate_status, I18n.t("projects.status.sent"), value: "versendet", class: "ml-2 cursor-pointer" %>
+          </div>
+        </div>
+      <% end %>
+
+      <p class="text-sm text-gray-500"><%= upload[:help_text] %></p>
+
+      <!-- Bereits hochgeladene Dateien -->
+      <% if project.persisted? && project.send(upload[:field]).attached? %>
+        <div class="mt-3">
+          <h4 class="font-semibold text-gray-700"><%= I18n.t("projects.already_uploaded_files") %></h4>
+          <ul class="text-sm text-gray-600">
+            <% project.send(upload[:field]).each do |file| %>
+              <li class="flex items-center">
+                <!-- Datei anzeigen -->
+                <a href="<%= show_file_project_path(project, file_type: upload[:field], attachment_id: file.id) %>" target="_blank" class="text-blue-500 underline"><%= file.filename %></a>
+                <!-- Datei löschen -->
+                <%= button_to I18n.t("projects.remove_file"), 
+                  remove_file_project_path(project, file_type: upload[:field], attachment_id: file.id), 
+                  method: :delete, 
+                  class: "ml-4 text-red-500 underline text-sm" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <!-- Datei hochladen -->
+      <%= form.file_field upload[:field], multiple: true, direct_upload: true, class: "block mt-2" %>
+    </div>
+  <% end %>
+
+
+  <!-- Experten-Auswahl -->
+  <div class="my-5">
+    <%= form.label :experts, I18n.t("projects.fields.add_experts"), class: "font-semibold text-gray-700" %>
+    <select id="expert-select" class="w-full p-3 border rounded-lg">
+      <option value=""><%= I18n.t("projects.fields.select_expert") %></option>
+      <% @experts.each do |expert| %>
+        <% unless @project.experts.include?(expert) %>
+          <option value="<%= expert.id %>"><%= expert.email %></option>
+        <% end %>
+      <% end %>
+    </select>
+  </div>
+  <div id="selected-experts" class="flex flex-wrap gap-2 mt-4">
+    <% @project.experts.each do |expert| %>
+      <div class="expert-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-lg flex items-center" data-id="<%= expert.id %>">
+        <span><%= expert.email %></span>
+        <button type="button" class="ml-2 text-red-500 remove-expert">&times;</button>
+        <input type="hidden" name="project[expert_ids][]" value="<%= expert.id %>">
+      </div>
+    <% end %>
+  </div>
+
+
+  <!-- Absenden des Formulars -->
+  <div class="inline">
+    <%= form.submit I18n.t("projects.save_project"), class: "rounded-full py-3 px-5 bg-fitiprimary text-white inline-block font-medium cursor-pointer mt-4" %>
+  </div>
+<% end %>
+
+
+<script>
+document.addEventListener("turbo:load", () => {
+  const expertSelect = document.getElementById('expert-select');
+  const selectedExpertsContainer = document.getElementById('selected-experts');
+
+  if (!expertSelect || !selectedExpertsContainer) return;
+
+  expertSelect.addEventListener('change', function() {
+    const expertId = expertSelect.value;
+    const expertEmail = expertSelect.options[expertSelect.selectedIndex].text;
+
+    if (!expertId) return;
+
+    // Überprüfen, ob der Experte bereits als Tag existiert
+    if (document.querySelector(`[data-id="${expertId}"]`)) {
+      return;
+    }
+
+    // Erstelle das Tag (Button)
+    const tag = document.createElement('div');
+    tag.classList.add('expert-tag', 'bg-blue-100', 'text-blue-800', 'px-4', 'py-2', 'rounded-lg', 'flex', 'items-center');
+    tag.setAttribute('data-id', expertId);
+
+    tag.innerHTML = `
+      <span>${expertEmail}</span>
+      <button type="button" class="ml-2 text-red-500 remove-expert">&times;</button>
+      <input type="hidden" name="project[expert_ids][]" value="${expertId}">
+    `;
+
+    // Tag hinzufügen und Option entfernen
+    selectedExpertsContainer.appendChild(tag);
+    expertSelect.remove(expertSelect.selectedIndex);
+    expertSelect.value = "";
+  });
+
+  // Entfernen eines Experten-Tags
+  selectedExpertsContainer.addEventListener('click', function(e) {
+    if (e.target.classList.contains('remove-expert')) {
+      const expertTag = e.target.closest('.expert-tag');
+      const expertId = expertTag.getAttribute('data-id');
+      const expertEmail = expertTag.querySelector('span').textContent;
+
+      // Tag entfernen
+      expertTag.remove();
+
+      // Prüfen, ob die Option bereits existiert – falls nicht, hinzufügen
+      if (!expertSelect.querySelector(`option[value="${expertId}"]`)) {
+        const option = new Option(expertEmail, expertId);
+        expertSelect.add(option);
+      }
+    }
+  });
+});
+</script>

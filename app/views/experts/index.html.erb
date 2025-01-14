@@ -1,0 +1,23 @@
+<div class="w-full">
+  <%= render partial: "layouts/page_header", locals: { 
+        title: I18n.t("experts.all"), 
+    } %>
+
+  <div class="flex justify-end mb-10">
+    <div class="flex space-x-4">
+      <%= link_to I18n.t("experts.new_expert"), new_expert_path, 
+        class: "py-3 px-5 text-white bg-[#d40031] rounded-full shadow-lg font-semibold border-2 border-[#d40031] hover:bg-white hover:text-[#d40031] hover:border-[#d40031] transition duration-300" %>
+        
+      <%= link_to I18n.t("usermanagement.expert_invite"), admin_users_path, 
+        class: "py-3 px-5 text-white bg-[#d40031] rounded-full shadow-lg font-semibold border-2 border-[#d40031] hover:bg-white hover:text-[#d40031] hover:border-[#d40031] transition duration-300" %>
+    </div>
+  </div>
+
+  <div id="experts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <% @experts.each do |expert| %>
+      <div class="bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+        <%= render partial: "previewexpert", locals: { expert: expert } %>
+      </div>
+    <% end %>
+  </div>
+</div>

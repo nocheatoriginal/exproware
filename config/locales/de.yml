@@ -1,0 +1,290 @@
+# Files in the config/locales directory are used for internationalization and
+# are automatically loaded by Rails. If you want to use locales other than
+# English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more about the API, please read the Rails Internationalization guide
+# at https://guides.rubyonrails.org/i18n.html.
+#
+# Be aware that YAML interprets the following case-insensitive strings as
+# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
+# must be quoted to be interpreted as strings. For example:
+#
+#     en:
+#       "yes": yup
+#       enabled: "ON"
+
+de:
+  exproware: "Exproware"
+  general:
+    please_select: "Bitte auswählen ..."
+    action: "Aktion"
+    profile: "Profil"
+    edit: "Bearbeiten"
+    delete: "Löschen"
+    save: "Speichern"
+    cancel: "Abbrechen"
+    back: "Zurück"
+    create: "Erstellen"
+    search: "⏎"
+    filter: "Filtern"
+    apply: "Anwenden"
+    details: "Details"
+    show: "Anzeigen"
+    unavailable: "Nicht verfügbar"
+    status: "Status"
+    search_placeholder: "Suche ..."
+    no_results: "Keine Ergebnisse"
+    delete_confirmation: "Möchtest du diese Aktion wirklich durchführen?\nDiese Aktion kann nicht rückgängig gemacht werden!"
+
+  homepage:
+    greetings: "Willkommen zurück"
+    show_profile: "Profil anzeigen"
+    create_profile: "Profil erstellen"
+
+  navbar:
+    home: "Startseite"
+    experts: "Expert*innen"
+    projects: "Projekte"
+    categories: "Kategorien"
+    usermanagement: "Verwaltung"
+    login: "Anmelden"
+    logout: "Abmelden"
+    register: "Registrieren"
+
+  usermanagement:
+    all: "Benutzer*innenverwaltung"
+    expert_invite: "Expert*in einladen"
+    send_invite: "Registrierungslink verschicken"
+    invited_at: "Eingeladen am"
+    change_password: "Passwort ändern"
+
+  experts:
+    all: "Expert*innen"
+    edit_profile: "Profil bearbeiten"
+    delete_profile: "Profil löschen"
+    save_profile: "Profil speichern"
+    back_to_experts: "Zurück zu den Expert*innen"
+    delete_expert: "Expert*in löschen"
+    new_expert: "Expert*in erstellen"
+    show_expert: "Profil anzeigen"
+    expert_could_not_be_saved: "Expert*in konnte nicht gespeichert werden:"
+    update_expert: "Profil aktualisieren"
+    save_expert: "Expert*in einladen"
+    enter_password: "Passwort eingeben"
+    submit: "Bestätigen"
+    fields:
+      first_name: "Vorname"
+      last_name: "Nachname"
+      academic_title: "Akademischer Titel"
+      salary: "Gehalt"
+      travel_willingness: "Reisebereitschaft"
+      categories: "Kategorien"
+      profile_image: "Profilbild"
+      biography: "Biografie"
+      email: "E-Mail"
+
+  projects:
+    all: "Projekte"
+    project_details: "Projektdetails"
+    new_project: "Projekt erstellen"
+    show_project: "Projekt anzeigen"
+    edit_project: "Projekt bearbeiten"
+    delete_project: "Projekt löschen"
+    project_could_not_be_saved: "Projekt konnte nicht gespeichert werden:"
+    save_project: "Projekt speichern"
+    back_to_projects: "Zurück zur Projektübersicht"
+    back_to_archived_projects: "Zu den archivierten Projekten"
+    fields:
+      title: "Projekt"
+      thematic_focus: "Themenschwerpunkte"
+      start_date: "Startdatum"
+      end_date: "Enddatum"
+      project_type: "Projekttyp"
+      client: "Auftraggeber*in"
+      location: "Durchführungsort"
+      participants_files: "Teilnehmer*innen-Datei"
+      invitation_files: "Einladungsdatei"
+      participation_certificate_files: "Teilnahmezertifikat"
+      file_status: "Status"
+      project_period: "Projektzeitraum"
+      add_experts: "Expert*innen hinzufügen"
+      select_expert: "Expert*in auswählen"
+      no_file_uploaded: ""
+      project_types:
+        project_type: "Projekttyp"
+        delegation_visit: "Delegationsbesuch"
+        lecturer_training: "Dozententraining"
+        professional_training: "Fachliche Weiterbildung"
+        summer_school: "Summer School"
+      period:
+        start_date: "Startdatum"
+        end_date: "Enddatum"
+    status:
+      in_progress: "In Bearbeitung"
+      sent: "Versendet"
+    placeholders:
+      project_title: "Gib den Titel des Projekts ein"
+      thematic_focus: "Gib die Themenschwerpunkte ein"
+      client: "Name des Auftraggebers"
+      location: "Gib den Durchführungsort ein"
+      date: "TT.MM.JJJJ"
+    help_texts:
+      participants_files: "Lade Teilnehmer*innen-Listen hoch"
+      invitation_files: "Lade Einladungsschreiben hoch"
+      participation_certificate_files: "Lade Teilnahmezertifikate hoch"
+    errors:
+      error: "Fehler"
+      project_could_not_be_saved: "Das Projekt konnte nicht gespeichert werden"
+    already_uploaded_files: "Bereits hochgeladene Dateien"
+    remove_file: "Datei entfernen"
+    submit: "Projekt erstellen"
+    archived:
+      back_to_active_projects: "Zurück zu den aktiven Projekten"
+      archived_project: "Projekt reaktivieren 📁"
+      archive_project: "Archivieren 📂"
+      archived_projects: "Archivierte Projekte"
+    project_schedule:
+      schedule: "Projektablaufplan"
+      budget_plan: "Budgetplan"
+      date_of_flight: "Flugdatum"
+      event: "Veranstaltung"
+      event_location: "Veranstaltungsort"
+      transport: "Transport"
+      accommodation: "Unterkunft"
+      interpreter: "Dolmetscher*in"
+      bills: "Rechnungen"
+
+  categories:
+    all: "Kategorien"
+    new_category: "Kategorie erstellen"
+    show_category: "Kategorie anzeigen"
+    edit_category: "Kategorie bearbeiten"
+    delete_category: "Kategorie löschen"
+    category_could_not_be_saved: "Kategorie konnte nicht gespeichert werden:"
+    save_category: "Kategorie speichern"
+    back_to_categories: "Zurück zu den Kategorien"
+    fields:
+      name: "Name"
+
+  user_roles:
+    admin: "Admin"
+    read_only: "Praktikant*in"
+    staff: "Mitarbeiter*in"
+    user: "Expert*in"
+
+  user:
+    one: "Benutzer*in"
+    role: "Rolle"
+    username: "Benutzername"
+    email: "E-Mail"
+    password: "Passwort"
+    password_confirmation: "Passwort bestätigen"
+    authenticated: "Authentifiziertes Profil ✅"
+
+  errors:
+    not_allowed_page:
+      header: "403 - Zugriff verweigert"
+      paragraph1: "Du hast keine Berechtigung, auf diese Seite zuzugreifen."
+      paragraph2: "Bitte überprüfe die URL oder kehre zur %{Startseite} zurück."
+    not_found_page:
+      header: "404 - Seite nicht gefunden"
+      paragraph1: "Die angeforderte Seite existiert nicht oder wurde verschoben."
+      paragraph2: "Bitte überprüfe die URL oder kehre zur %{Startseite} zurück."
+
+  footer:
+    heading: "Mit ❤️ und Hingabe entwickelt für"
+    first_paragraph: "Frankfurter Institut für Technologie und Innovation e.V."
+    second_paragraph: "Ferdinand-Happ-Straße 53, D-60314 Frankfurt am Main"
+    imprint: "Impressum"
+    privacy_policy: "Datenschutzerklärung"
+    contact: "Kontakt"
+
+  expert_could_not_be_saved: "Expert*in konnte nicht gespeichert werden."
+  project_could_not_be_saved: "Projekt konnte nicht gespeichert werden."
+  category_could_not_be_saved: "Kategorie konnte nicht gespeichert werden."
+  
+  activerecord:
+    errors:
+      models:
+        expert:
+          attributes:
+            email:
+              taken: "Die E-Mail-Adresse ist bereits vergeben!"
+          taken: "Expert*in existiert bereits"
+        user:
+          attributes:
+            email:
+              blank: "E-Mail darf nicht leer sein"
+          blank: "Benutzer*in darf nicht leer sein"
+      messages:
+        taken: "ist bereits vergeben!"
+        blank: "darf nicht leer sein"
+
+  errors:
+    attributes:
+      email:
+        blank: "E-Mail darf nicht leer sein"
+    messages:
+      blank: "darf nicht leer sein"
+
+  devise:
+    passwords:
+      edit:
+        title: "Passwort ändern"
+        new_password_label: "Neues Passwort"
+        password_confirmation_label: "Neues Passwort bestätigen"
+        submit_button: "Passwort ändern"
+        password_hint: "%{count} Zeichen mindestens"
+      new:
+        title: "Passwort vergessen?"
+        email_label: "E-Mail Adresse"
+        submit_button: "Passwort zurücksetzen"
+    registrations:
+      edit:
+        title: "%{resource} bearbeiten"
+        email_label: "E-Mail Adresse"
+        password_label: "Neues Passwort"
+        password_hint: "(Leer lassen, wenn Sie es nicht ändern möchten)"
+        password_min_length: "Mindestens %{count} Zeichen"
+        password_confirmation_label: "Passwort bestätigen"
+        current_password_label: "Aktuelles Passwort"
+        current_password_hint: "(Wir benötigen Ihr aktuelles Passwort, um die Änderungen zu bestätigen)"
+        submit_button: "Aktualisieren"
+        cancel_account_title: "Konto löschen"
+        cancel_account_text: "Unzufrieden? Konto löschen."
+        cancel_account_button: "Konto löschen"
+      new:
+        title: "Registrieren"
+        email_label: "E-Mail Adresse"
+        password_label: "Passwort"
+        password_hint: "Mindestens %{count} Zeichen erforderlich"
+        password_confirmation_label: "Passwort bestätigen"
+        submit_button: "Registrieren"
+    shared:
+      links:
+        login: "Anmelden"
+        forgot_password: "Passwort vergessen?"
+        resend_confirmation: "Bestätigungsanweisungen erneut senden"
+        unlock_instructions: "Entsperranweisungen erneut senden"
+        sign_in_with: "Anmelden mit %{provider}"
+    confirmations:
+      new:
+        title: "Bestätigungsanweisungen erneut senden"
+        email_label: "E-Mail Adresse"
+        submit_button: "Anweisungen senden"
+    sessions:
+      remember_me: "Angemeldet bleiben"

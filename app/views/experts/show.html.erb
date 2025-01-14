@@ -1,0 +1,25 @@
+<div class="mx-auto md:w-2/3 w-full">
+    <% if notice.present? %>
+      <div class="mb-6">
+        <p class="py-3 px-4 bg-green-100 text-green-700 font-medium rounded-lg shadow-md" id="notice">
+          <%= notice %>
+        </p>
+      </div>
+    <% end %>
+
+    <%= render @expert %>
+
+    <div class="flex flex-wrap items-center gap-4 mt-6">
+      <%= link_to I18n.t("experts.edit_profile"), edit_expert_path(@expert), class: "rounded-full py-3 px-6 bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all duration-300 shadow-md" %>
+      
+      <% if current_user.user? %>
+        <%= button_to I18n.t("experts.delete_profile"), @expert, method: :delete, data: {turbo_confirm: I18n.t("general.delete_confirmation")}, 
+          class: "rounded-full py-3 px-6 bg-red-500 hover:bg-red-600 text-white font-medium transition-all duration-300 shadow-md" %>
+      <% else %>
+        <%= link_to I18n.t("experts.back_to_experts"), experts_path, 
+          class: "rounded-full py-3 px-6 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium transition-all duration-300 shadow-md" %>
+        
+        <%= button_to I18n.t("experts.delete_profile"), @expert, method: :delete, data: {turbo_confirm: I18n.t("general.delete_confirmation")}, 
+          class: "rounded-full py-3 px-6 bg-red-500 hover:bg-red-600 text-white font-medium transition-all duration-300 shadow-md" %>
+      <% end %>
+  </div>

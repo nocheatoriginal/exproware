@@ -1,0 +1,68 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+john_doe:
+  first_name: "John"
+  last_name: "Doe"
+  academic_title: "Dr."
+  salary: 100.0
+  travel_willingness: "I am willing to travel"
+  profile_image: "implement later ..."
+  biography: "I am a professor of mathematics and physics."
+  email: "john.doe@example.com"
+  categories: [Category.find(1), Category.find(2)]
+
+emilia_clarke:
+  first_name: Emilia
+  last_name: Clarke
+  academic_title: Prof.
+  salary: 200.0
+  travel_willingness: "I am willing to travel"
+  profile_image: "implement later ..."
+  biography: "I am a professor of software engineering."
+  email: "exmilia.clarke@example.com"
+  categories: [Category.find(1), Category.find(2)]
+
+
+jason_bourne:
+  first_name: Jason
+  last_name: Bourne
+  academic_title: Prof.
+  salary: 300.0
+  travel_willingness: "I am willing to travel"
+  profile_image: "implement later ..."
+  biography: "I am a professor of biology."
+  email: "jason.bourne@example.com"
+  categories: [Category.find(1), Category.find(2)]
+
+thomas_anderson:
+  first_name: Thomas
+  last_name: Anderson
+  academic_title: Prof.
+  salary: 400.0
+  travel_willingness: "I am willing to travel"
+  profile_image: "implement later ..."
+  biography: "I am a professor of chemistry."
+  email: "thomas.anderson@example.com"
+  categories: [Category.find(1), Category.find(2)]
+
+alice_wonderland:
+  first_name: Alice
+  last_name: Wonderland
+  academic_title: Prof.
+  salary: 500.0
+  travel_willingness: "I am willing to travel"
+  profile_image: "implement later ..."
+  biography: "I am a professor of mathematics."
+  email: "alice.wonderland@example.com"
+  categories: [Category.find(1), Category.find(2)]
+
+lisa_simpson:
+  first_name: Lisa
+  last_name: Simpson
+  academic_title: Prof.
+  salary: 600.0
+  travel_willingness: "I am willing to travel"
+  profile_image: "implement later ..."
+  biography: "I am a professor of physics."
+  email: "lisa.simpson@example.com"
+  categories: [Category.find(1), Category.find(2)]

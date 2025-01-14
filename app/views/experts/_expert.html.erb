@@ -1,0 +1,48 @@
+<div id="<%= dom_id expert %>" class="bg-white p-5 rounded shadow-md">
+  <p class="my-5">
+    <strong class="block text-3xl font-bold text-gray-900 mb-2"><%= expert.first_name %> <%= expert.last_name %></strong>
+  </p>
+
+  <div class="flex flex-row">
+    <div class="w-2/3">
+      <p class="bg-fitibg p-5 m-5 rounded" style="width: 600px; height: 100px; overflow: hidden;">
+        <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("experts.fields.academic_title") %>*</strong>
+        <span class="text-gray-600"><%= expert.academic_title %></span>
+      </p>
+
+      <p class="bg-fitibg p-5 m-5 rounded" style="width: 600px; height: 100px; overflow: hidden;">
+        <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("experts.fields.salary") %>*</strong>
+        <span class="text-gray-600"><%= expert.salary %></span>
+      </p>
+
+      <p class="bg-fitibg p-5 m-5 rounded" style="width: 600px; height: 100px; overflow: hidden;">
+        <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("experts.fields.travel_willingness") %>*</strong>
+        <span class="text-gray-600"><%= expert.travel_willingness %></span>
+      </p>
+
+      <p class="bg-fitibg p-5 m-5 rounded" style="width: 600px; height: 150px; overflow-y: auto;">
+        <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("experts.fields.categories") %>*</strong>
+        <ul class="text-gray-600">
+          <% expert.categories.each do |category| %>
+            <li class="border border-gray-300 rounded-lg py-2 px-3 mb-2"><%= category.name %></li>
+          <% end %>
+        </ul>
+      </p>
+
+      <p class="bg-fitibg p-5 m-5 rounded" style="width: 600px; height: 100px; overflow: hidden;">
+        <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("experts.fields.profile_image") %>*</strong>
+        <span class="text-gray-600"><%= expert.profile_image %></span>
+      </p>
+
+      <p class="bg-fitibg p-5 m-5 rounded" style="width: 600px; height: 150px; overflow-y: auto;">
+        <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("experts.fields.biography") %>*</strong>
+        <span class="text-gray-600"><%= expert.biography %></span>
+      </p>
+
+      <p class="bg-fitibg p-5 m-5 rounded" style="width: 600px; height: 100px; overflow: hidden;">
+        <strong class="block text-lg font-semibold text-gray-800 mb-2"><%= I18n.t("experts.fields.email") %>*</strong>
+        <span class="text-gray-600"><%= expert.email %></span>
+      </p>
+    </div>
+  </div>
+</div>

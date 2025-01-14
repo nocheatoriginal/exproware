@@ -1,0 +1,28 @@
+<div id="<%= dom_id user %>" class="bg-white shadow-lg rounded-lg overflow-hidden max-w-3xl mx-auto mt-10">
+  <div class="bg-gradient-to-r from-red-500 to-red-700 p-6 text-white text-center">
+    <h1 class="text-4xl font-extrabold tracking-wide">
+      <%= I18n.t("user_roles.#{user.role}") %>
+    </h1>
+  </div>
+
+  <div class="p-6">
+    <div class="flex flex-col items-start space-y-4">
+      <div class="w-full">
+        <p class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <span class="block text-xl font-semibold text-gray-700">
+            <%= I18n.t("user.email") %>
+          </span>
+          <span class="text-lg text-gray-600 mt-2 block"><%= user.email %></span>
+        </p>
+      </div>
+
+
+      <% if current_user.id == user.id %>
+      <div class="w-full">
+        <%= link_to I18n.t("usermanagement.change_password"), "/users/edit", 
+          class: "w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-full shadow transition-transform transform hover:scale-105 text-center block" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

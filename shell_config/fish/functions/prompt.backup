@@ -1,0 +1,47 @@
+#!/usr/bin/env fish
+
+function fish_prompt --description 'Write out the prompt'
+    set -l last_status $status
+    set -l git_branch (git branch --show-current 2>/dev/null)
+    set -l whoami_color 6AA8F8
+    set -l color_cwd $fish_color_cwd
+    set -l suffix "➜"
+    if [ "$USER" = "root" ]
+        set whoami_color $fish_color_cwd_root
+        set suffix "#"
+    end
+    #set -l git_branch (git branch 2>/dev/null | sed -n '/\* /s///p')
+    set_color $whoami_color
+    echo -n (whoami)
+    set_color normal
+    echo -n '@'(prompt_hostname)
+    echo -n ' '
+    set_color $color_cwd
+    echo -n (prompt_pwd)
+
+    : '
+    set -l pwd_length (string length (prompt_pwd))
+    if test $pwd_length -ge 30
+        echo -n '~/'(basename (prompt_pwd))
+    else
+        echo -n (prompt_pwd)
+    end
+    '
+
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1
+        set_color blue
+        echo -n ' git:('
+        set_color red
+        echo -n "$git_branch"
+        set_color blue
+        echo -n ')'
+    end
+    if not test $last_status -eq 0
+        set_color $fish_color_error
+        echo -n " ["
+        echo -n (fish_status_to_signal $last_status)
+        echo -n "]"
+    end
+    set_color normal
+    echo -n ' '$suffix' '
+end

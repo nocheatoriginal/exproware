@@ -1,0 +1,28 @@
+<div class="w-full my-10">
+  <div class="mx-auto">
+    <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <% end %>
+
+    <div class="mb-10 flex items-center space-x-2">
+      <% if @project.archived? %>
+        <%= link_to I18n.t("projects.back_to_archived_projects"), archived_projects_path, class: "rounded-full py-3 px-5 bg-gray-100 inline-block font-medium" %>
+        <%= form_with model: @project, url: project_path(@project), method: :patch, local: true, class: "inline-block" do |form| %>
+          <%= form.hidden_field :archived, value: false %>
+          <%= form.submit I18n.t("projects.archived.archived_project"), class: "rounded-full py-3 px-5 bg-green-300 text-gray-700 font-medium cursor-pointer" %>
+        <% end %>
+      <% else %>
+        <%= link_to I18n.t("projects.back_to_projects"), projects_path, class: "rounded-full py-3 px-5 bg-gray-100 inline-block font-medium" %>
+        <%= form_with model: @project, url: project_path(@project), method: :patch, local: true, class: "inline-block" do |form| %>
+          <%= form.hidden_field :archived, value: true %>
+          <%= form.submit I18n.t("projects.archived.archive_project"), class: "rounded-full py-3 px-5 bg-gray-100 font-medium cursor-pointer" %>
+        <% end %>
+      <% end %>
+  
+      <%= link_to I18n.t("projects.edit_project"), edit_project_path(@project), class: "rounded-full py-3 px-5 bg-blue-500 text-white inline-block font-medium" %>
+      <%= button_to I18n.t("projects.delete_project"), @project, method: :delete, data: {turbo_confirm: I18n.t("general.delete_confirmation")}, class: "rounded-full py-3 px-5 text-white bg-fitiprimary font-medium inline-block" %>
+    </div>
+
+    <%= render @project %>
+  </div>
+</div>

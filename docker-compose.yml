@@ -1,0 +1,27 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+    command: bash -c "bundle exec rails db:prepare && bundle exec rails server -b 0.0.0.0"
+    depends_on:
+      - tailwind
+
+  tailwind:
+    build: .
+    volumes:
+      - ./:/app
+    command: rails tailwindcss:watch
+    stdin_open: true
+
+# Entfernen oder deaktivieren Sie den PostgreSQL-Dienst für die lokale Entwicklung
+#  db:
+#    image: postgres:latest
+#    environment:
+#      POSTGRES_DB: ${POSTGRES_DB}
+#      POSTGRES_USER: ${POSTGRES_USER}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#    volumes:
+#      - pg_data:/var/lib/postgresql/data

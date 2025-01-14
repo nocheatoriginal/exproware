@@ -1,0 +1,109 @@
+<div class="w-full">
+  <%= render partial: "layouts/page_header", locals: { 
+        title: I18n.t("projects.all"), 
+    } %>
+
+  <div class="flex justify-end mb-10">
+  <div class="flex flew-row items-center justify-end">
+    <% if @archived_projects.present? %>
+      <%= link_to I18n.t("projects.archived.archived_projects"), archived_projects_path, class: "py-3 px-5 text-white bg-[#d40031] rounded-full shadow-lg font-semibold border-2 border-[#d40031] hover:bg-white hover:text-[#d40031] hover:border-[#d40031] transition duration-300 mr-4" %>
+    <% end %>
+     <%= link_to I18n.t("projects.new_project"), new_project_path, class: "py-3 px-5 text-white bg-[#d40031] rounded-full shadow-lg font-semibold border-2 border-[#d40031] hover:bg-white hover:text-[#d40031] hover:border-[#d40031] transition duration-300 mr-4" %>
+    </div>
+  </div>
+  <!-- Suchleiste und Filterbereich -->
+<div class="flex flex-col lg:flex-row justify-between items-center mb-6 bg-gray-100 p-4 rounded-lg shadow-md">
+  <div class="relative flex items-center lg:order-1 mb-4 lg:mb-0">
+    <button id="filter-button" class="rounded-full py-3 px-5 bg-white border border-red-600 text-red-600 shadow-md inline-block font-medium  hover:text-[#ffffff] hover:bg-[#d40031] hover:border-[#ffffff] transition duration-300">
+    <i class="fas fa-filter"></i>
+    <span><%= I18n.t("general.filter") %></span>
+    </button>
+
+    <!-- Dropdown-Filter -->
+    <div id="filter-options" class="hidden absolute top-full mt-2 w-80 bg-white border border-gray-300 rounded-lg shadow-md z-10">
+  <div class="p-4">
+    <p class="font-semibold text-gray-700 mb-4"><%= I18n.t("projects.fields.project_types.project_type") %></p>
+    <div id="project-type-buttons" class="flex flex-wrap gap-2">
+      <% Project.project_types.each do |key, _value| %>
+        <button type="button"
+          class="w-full project-type-button py-2 px-4 bg-gray-400 rounded-full text-white font-medium hover:bg-gray-500 transition duration-300"
+          data-value="<%= key %>">
+          <%= I18n.t("projects.fields.project_types.#{key}") %>
+        </button>
+      <% end %>
+    </div>
+  </div>
+      <%= form_with url: projects_path, method: :get, local: true do |form| %>
+        <input type="hidden" name="project_type" id="selected-project-type" value="">
+        <div class="p-4 border-t">
+          <%= form.submit I18n.t("general.apply"), class: "w-full py-2 px-4 bg-fitiprimary text-white rounded-full font-medium hover:bg-red-700 transition", onclick: "document.getElementById('filter-options').classList.add('hidden');" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Suchleiste -->
+  <div class="flex items-center space-x-4 lg:order-2 w-full lg:w-auto">
+    <%= form_with(url: projects_path, method: :get, local: true, class: "w-full lg:w-auto") do |form| %>
+      <div class="flex items-center bg-white border border-gray-300 rounded-full shadow-sm px-3 py-2 w-full lg:w-auto">
+        <%= form.text_field :search, value: params[:search], placeholder: I18n.t("general.search_placeholder"), class: "ml-2 w-full lg:w-auto border-none focus:ring-0" %>
+        <%= form.submit I18n.t("general.search"), class: "ml-4 bg-gray-400 text-white px-4 py-2 rounded-full font-medium hover:bg-gray-500 transition" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  document.getElementById("filter-button").addEventListener("click", function () {
+    var filterOptions = document.getElementById("filter-options");
+    filterOptions.classList.toggle("hidden");
+  });
+
+  document.querySelectorAll('.project-type-button').forEach(button => {
+    button.addEventListener('click', function () {
+      const selectedValue = this.getAttribute('data-value');
+      const hiddenInput = document.getElementById('selected-project-type');
+
+      // Reset all buttons
+      document.querySelectorAll('.project-type-button').forEach(btn => {
+        btn.classList.remove('bg-[#d40031]', 'text-white');
+        btn.classList.add('bg-gray-400');
+      });
+
+      // Mark the selected button
+      this.classList.remove('bg-gray-400');
+      this.classList.add('bg-[#d40031]', 'text-white');
+
+      // Set the selected project_type value in the hidden input
+      hiddenInput.value = selectedValue;
+    });
+  });
+
+  // Mark button after reload (optional, if the JavaScript is running after render)
+  document.addEventListener("DOMContentLoaded", function () {
+    const selectedType = document.getElementById('selected-project-type').value;
+    const selectedButton = document.querySelector(`[data-value="${selectedType}"]`);
+    if (selectedButton) {
+      selectedButton.classList.remove('bg-gray-400');
+      selectedButton.classList.add('bg-[#d40031]', 'text-white');
+    }
+  });
+</script>
+
+
+<!-- Projects Section -->
+<div>
+  <div class="bg-gray-50 p-4 rounded-lg shadow-md mb-10">
+    <div id="projects" class="min-w-full">
+      <% @projects.each do |project| %>
+        <div class="bg-white p-4 rounded-lg shadow-md mb-10 flex flex-col h-full">
+          <%= render partial: "previewproject", locals: { project: project } %>
+          <div class="mt-auto flex justify-end"> <!-- Flexbox für die Positionierung des Buttons -->
+            <%= link_to I18n.t("general.details"), project, class: "rounded-full py-3 px-5 bg-white border border-red-600 text-red-600 shadow-md inline-block font-medium" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>

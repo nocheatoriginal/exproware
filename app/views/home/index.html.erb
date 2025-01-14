@@ -1,0 +1,90 @@
+<div class="image-container">
+  <% display_user = current_user.email %>
+  <h3 class="align-top text-3xl md:text-4xl text-center text-gray-800 font-bold"><%= I18n.t("homepage.greetings") %> <%= display_user %>!</h3>
+  
+  <div class="cards-container grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
+  <% if current_user.admin? || current_user.read_only? %>
+    <%= link_to experts_path, class: 'card' do %>
+      <i class="fas fa-user-tie text-4xl mb-2"></i>
+      <span><%= I18n.t("navbar.experts") %></span>
+    <% end %>
+    <%= link_to projects_path, class: 'card' do %>
+      <i class="fas fa-file-invoice text-4xl mb-2"></i>
+      <span><%= I18n.t("navbar.projects") %></span>
+    <% end %>
+    <%= link_to categories_path, class: 'card' do %>
+      <i class="fas fa-list-alt text-4xl mb-2"></i>
+      <span><%= I18n.t("navbar.categories") %></span>
+    <% end %>
+    <%= link_to admin_users_path, class: 'card' do %>
+      <i class="fas fa-cogs text-4xl mb-2"></i>
+      <span><%= I18n.t("navbar.usermanagement") %></span>
+    <% end %>
+  <% end %>
+  </div>
+  
+  <div class="cards-container">
+  <% if current_user.user? && !current_user.initialized? %>
+    <%= link_to new_expert_path, class: 'card' do %>
+      <i class="fas fa-user-tie text-4xl mb-2"></i>
+      <span><%= I18n.t("homepage.create_profile") %></span>
+    <% end %>
+  <% end %>
+
+  <% if current_user.user? && current_user.initialized? %>
+    <%= link_to expert_path(current_user.expert_id), class: 'card' do %>
+      <i class="fas fa-user-tie text-4xl mb-2"></i>
+      <span><%= I18n.t("homepage.show_profile") %></span>
+    <% end %>
+  <% end %>
+  </div>
+</div>
+
+<style>
+  .image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 10%;
+    z-index: 10;
+    position: relative;
+  }
+
+  .cards-container {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #D40031;
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .card i {
+    color: #5A5A5A;
+  }
+
+  .card span {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+  }
+</style>

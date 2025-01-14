@@ -1,0 +1,29 @@
+<%= form_with(model: category, class: "contents") do |form| %>
+  <% if category.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-4 py-3 font-medium rounded-lg mt-5 shadow-md">
+      <h2 class="text-lg font-semibold">
+        <%= pluralize(category.errors.count, "error") %> <%= I18n.t("categories.category_could_not_be_saved") %>
+      </h2>
+
+      <ul class="list-disc list-inside mt-2">
+        <% category.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-6">
+    <%= form.label :name, I18n.t("categories.fields.name"), class: "block text-lg font-medium text-gray-700" %>
+    <%= form.text_field :name, 
+      class: "block shadow-sm rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 outline-none px-4 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="flex items-center justify-start gap-4 mt-6">
+    <%= form.submit I18n.t("categories.save_category"), 
+      class: "rounded-full py-3 px-6 bg-blue-500 hover:bg-blue-600 text-white font-medium transition-all duration-300 shadow-md" %>
+      
+    <%= link_to I18n.t("general.cancel"), categories_path, 
+      class: "rounded-full py-3 px-6 bg-red-500 hover:bg-red-600 text-white font-medium shadow-md transition-all duration-300" %>
+  </div>
+<% end %>

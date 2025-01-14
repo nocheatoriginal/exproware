@@ -1,0 +1,9 @@
+<div class="mx-auto md:w-2/3 w-full">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="font-bold text-4xl"><%= I18n.t("projects.new_project") %></h1>  
+  </div>
+  
+  <%= render "form", project: @project %>
+
+  <%= link_to I18n.t("general.cancel"), projects_path, class: "ml-2 rounded-full py-3 px-5 bg-gray-100 inline-block font-medium" %>
+</div>

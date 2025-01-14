@@ -1,0 +1,38 @@
+<div class="relative p-6 rounded-xl border border-slate-200 shadow-md hover:shadow-lg transition-shadow duration-300 min-h-[300px] flex flex-col justify-between h-full">
+  
+  <div class="mb-6">
+    <p class="text-3xl font-extrabold text-gray-900 leading-tight">
+      <%= expert.first_name %> <%= expert.last_name %>
+    </p>
+  </div>
+
+  <div class="space-y-4 flex-grow">
+    <div class="flex items-center">
+      <strong class="text-lg font-medium text-gray-700 w-48"><%= I18n.t("experts.fields.academic_title") %>:</strong>
+      <span class="text-gray-600"><%= expert.academic_title.presence || "bitte eintragen" %></span>
+    </div>
+
+    <div class="flex items-center">
+      <strong class="text-lg font-medium text-gray-700 w-48"><%= I18n.t("experts.fields.salary") %>:</strong>
+      <span class="text-gray-600"><%= number_to_currency(expert.salary) %></span>
+    </div>
+
+    <div class="flex items-center">
+      <strong class="text-lg font-medium text-gray-700 w-48"><%= I18n.t("experts.fields.travel_willingness") %>:</strong>
+      <span class="text-gray-600"><%= expert.travel_willingness.presence || "bitte eintragen" %></span>
+    </div>
+
+    <div class="flex items-start">
+      <strong class="text-lg font-medium text-gray-700 w-48"><%= I18n.t("experts.fields.categories") %>:</strong>
+      <span class="text-gray-600"><%= expert.categories.map(&:name).join(', ') %></span>
+    </div>
+  </div>
+
+  <div class="mt-6">
+    <%= link_to expert, class: "w-full block" do %>
+      <button class="w-full rounded-full py-3 px-6 bg-gray-400 hover:bg-gray-500 text-white font-medium transition-all duration-300 shadow-md">
+        <%= I18n.t("experts.show_expert") %>
+      </button>
+    <% end %>
+  </div>
+</div>

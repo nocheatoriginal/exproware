@@ -1,0 +1,10 @@
+<div class="mx-auto md:w-2/3 w-full">
+  <h1 class="font-bold text-4xl"><%= I18n.t("projects.edit_project") %></h1>
+
+  <%= render "form", project: @project %>
+
+  <%= link_to I18n.t("general.cancel"), @project, class: "ml-2 rounded-full py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <!-- Nicht unbedingt notwendig ...
+  <%= link_to I18n.t("projects.back_to_projects"), projects_path, class: "ml-2 rounded-full py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  -->
+</div>

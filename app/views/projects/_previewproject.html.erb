@@ -1,0 +1,54 @@
+<div id="<%= dom_id project %>" class="relative bg-white p-4 rounded">
+  
+  <!-- Projekt Titel -->
+  <p class="my-0.5">
+    <strong class="m-1 block text-3xl font-semibold text-black mb-1"><%= project.project_title %></strong>
+  </p>
+
+  <!-- Auftraggeber nebeneinander -->
+  <p class="flex items-center p-1 m-0.5 rounded">
+    <strong class="text-lg font-semibold text-gray-600 mr-2"><%= I18n.t("projects.fields.client") %></strong>
+    <span class="text-gray-600 mr-4"><%= project.client %></span>
+  </p>
+
+  <!-- Projekttyp Button in neuer Zeile und nicht über die ganze Breite -->
+  <p class="p-1 m-0.5 rounded mt-2"> <!-- Verringertes margin-top -->
+    <span class="inline-block py-1 px-3 bg-gray-100 text-gray-800 font-medium rounded-md">
+      <% if project.project_type %>
+        <%= I18n.t("projects.fields.project_types.#{project.project_type}") %>
+      <% else %>
+        <%= I18n.t("general.unavailable") %>
+      <% end %>
+    </span>
+  </p>
+
+  <!-- Ort und Datum rechts oben mit Icons -->
+  <div class="absolute top-4 right-4 text-gray-600 space-y-1 text-right">
+    
+    <!-- Ort mit Icon -->
+    <div class="flex items-center justify-end">
+      <svg class="w-5 h-5 text-gray-500 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+      </svg>
+      <span class="text-sm font-semibold"><%= project.location %></span>
+    </div>
+
+    <!-- Startdatum mit Icon -->
+    <div class="flex items-center justify-end">
+      <svg class="w-5 h-5 text-gray-500 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-6 7h6m-6 4h6M3 21h18M4 5h16c.55 0 1 .45 1 1v14c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1z"/>
+      </svg>
+      <span class="text-sm"><%= project.start_date %></span>
+    </div>
+
+    <!-- Enddatum mit Icon -->
+    <div class="flex items-center justify-end">
+      <svg class="w-5 h-5 text-gray-500 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-6 7h6m-6 4h6M3 21h18M4 5h16c.55 0 1 .45 1 1v14c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1z"/>
+      </svg>
+      <span class="text-sm"><%= project.end_date %></span>
+    </div>
+  </div>
+
+</div>
+

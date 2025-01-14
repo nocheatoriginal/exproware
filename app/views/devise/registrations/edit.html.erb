@@ -1,0 +1,56 @@
+<div class="flex items-center justify-center">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center"><%= t('devise.registrations.edit.title', resource: resource_name.to_s.humanize) %></h2>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "space-y-6" }) do |f| %>
+
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label :email, t('devise.registrations.edit.email_label'), class: "block text-sm font-medium text-gray-700" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div class="text-sm text-gray-500 mb-4">
+          <%= t('devise.registrations.edit.pending_reconfirmation', email: resource.unconfirmed_email) %>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :password, t('devise.registrations.edit.password_label'), class: "block text-sm font-medium text-gray-700" %>
+        <p class="text-xs text-gray-500 mb-2"><%= t('devise.registrations.edit.password_hint') %></p>
+        <%= f.password_field :password, autocomplete: "new-password", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+        <% if @minimum_password_length %>
+          <p class="text-xs text-gray-500 mb-2">
+            (<%= t('devise.registrations.edit.password_min_length', count: @minimum_password_length) %>)
+          </p>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, t('devise.registrations.edit.password_confirmation_label'), class: "block text-sm font-medium text-gray-700" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :current_password, t('devise.registrations.edit.current_password_label'), class: "block text-sm font-medium text-gray-700" %>
+        <p class="text-xs text-gray-500 mb-2"><%= t('devise.registrations.edit.current_password_hint') %></p>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit t('devise.registrations.edit.submit_button'), class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-fitiprimary hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      </div>
+    <% end %>
+
+    <h3 class="text-lg font-semibold mt-6"><%= t('devise.registrations.edit.cancel_account_title') %></h3>
+    <p class="text-sm text-gray-500 mb-4"><%= t('devise.registrations.edit.cancel_account_text') %></p>
+
+    <%= button_to t('devise.registrations.edit.cancel_account_button'), registration_path(resource_name), data: { confirm: t('general.delete_confirmation'), turbo_confirm: t('general.delete_confirmation') }, method: :delete, class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" %>
+
+    <div class="mt-6">
+      <%= link_to t('general.back'), :back, class: "text-sm text-indigo-600 hover:underline" %>
+    </div>
+  </div>
+</div>
